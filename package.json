@@ -1,0 +1,56 @@
+{
+  "name": "disney-plus-clone",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.17",
+    "@chakra-ui/react": "^2.5.2",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@reduxjs/toolkit": "^1.8.3",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.3.0",
+    "apexcharts": "^3.35.4",
+    "axios": "^1.3.4",
+    "firebase": "^9.18.0",
+    "firebase-tools": "^11.24.1",
+    "framer-motion": "^10.8.5",
+    "google-auth-library": "^8.1.1",
+    "plyr": "^3.7.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-html5video": "^2.5.1",
+    "react-loading-skeleton": "^3.2.0",
+    "react-player": "^2.12.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
