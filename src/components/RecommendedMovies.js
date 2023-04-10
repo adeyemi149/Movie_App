@@ -12,8 +12,9 @@ const RecommendedMovies = ({isLoading}) => {
 	<Container>
 		<h4>Recommended for You</h4>
 		  <Content>
-			  {isLoading && <MovieSkeleton cards={4} height="180px" />}
-			  {recommended?.slice(4, 8).map(recommend => (		  
+			  {isLoading
+				  ? <MovieSkeleton cards={4} height="180px" />
+			  : recommended?.slice(4, 8).map(recommend => (		  
 					  <Wrap key={recommend.id}>
 						  <Link to={`/detail/${recommend.id}`}>
 						<img src= {`https://image.tmdb.org/t/p/original${recommend.backdrop_path}`} />

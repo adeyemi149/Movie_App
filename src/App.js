@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import './App.css';
 import Header from './components/Header';
 import Home from './components/Home';
 import Detail from './components/Detail';

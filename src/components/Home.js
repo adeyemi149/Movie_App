@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
+import styled from "@emotion/styled";
 import ImageSlider from './ImageSlider'
 import NewDisney from './NewDisney'
 import Originals from './original'
@@ -10,6 +10,7 @@ import { trending, originals, recommendedForYou } from "../apiURL/apiURL"
 import { useDispatch, useSelector } from "react-redux";
 import useHttp from '../utils/useHttp';
 import { setMovies } from '../features/movieSlice';
+import {Box} from "@chakra-ui/react"
 
 const Home = () => {
 	const dispatch = useDispatch()
@@ -40,11 +41,15 @@ const Home = () => {
 
 export default Home
 
-const Container = styled.main`
+const Container = styled(Box)`
 	min-height: calc(100vh - 250px);
 	position: relative;
+	color: white;
+	background-color: #040714;
+
 
 	&:before {
+
 		background: url("/images/home-background.png") center center / cover
 		no-repeat fixed;
 		content: "";

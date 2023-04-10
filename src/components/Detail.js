@@ -93,7 +93,7 @@ const Detail = () => {
 			  <span>{details?.release_date}</span>
 			  <span>🔘{details?.runtime}mins</span>
 		  </DateTitle>
-		  {isLoading && <SkeletonText noOfLines={2} width="20%"/>}
+		  {isLoading && <SkeletonText mb={2} noOfLines={2} width="20%" />}
 		  {details?.genres.map(genre => (
 			  <Text key={genre.id} mb={3} display="inline-block" fontSize="15px">{genre.name},&nbsp;</Text>
 		  ))}
@@ -107,9 +107,9 @@ const Detail = () => {
 			  </TrailerButton>
 		<Modal isOpen={isOpen} onClose={onClose} size="3xl" px="0">
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Trailer</ModalHeader>
-          <ModalCloseButton />
+        <ModalContent background="#040714">
+          <ModalHeader color="#fff">Trailer</ModalHeader>
+          <ModalCloseButton color="#fff" />
 				<ModalBody>
 					{
 						trailer?.length 
@@ -130,7 +130,7 @@ const Detail = () => {
 			</GroupWatchButton>
 		</Controls>
 		<Subtitle>
-			{details?.title || <SkeletonText noOfLines={1} width="15%" />}
+			{details?.title || <SkeletonText mb={2} noOfLines={1} width="15%" />}
 			  <Meta vote={!details?.vote_average}>{details?.vote_average.toFixed(1)}</Meta>
 		</Subtitle>
 		  <Description>
@@ -146,6 +146,7 @@ const Container = styled.div`
 	min-height: calc(100vh - 70px);
 	padding: 0 calc(3.5vw + 5px);
 	position: relative;
+	color: #fff;
 `
 
 const Background = styled.div`

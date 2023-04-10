@@ -39,7 +39,10 @@ const SearchMovies = () => {
 	}
 
 	useEffect(() => {
-		setResults(trendingMovies)
+		const addResults = () => {
+			setResults(trendingMovies)
+		}
+		addResults();
 	}, [trendingMovies])
 
 	const handleSubmit = (e) => {
@@ -52,16 +55,16 @@ const SearchMovies = () => {
 	return (
 		<>	
 			{!user && navigate("/")}
-		<Flex justifyContent="center" mt={3} mx="auto" width={{ sm: "300px", md: "400px", lg: "540px" }}>
+			<Flex justifyContent="center" mt={3} mx="auto" width={{ sm: "300px", md: "400px", lg: "540px" }}>
 				<form onSubmit={handleSubmit}>
 				<InputGroup>	
 						<InputLeftElement children={<SearchIcon color='gray.300'/>} />
-						<Input variant="filled" placeholder="Search by title" width="500px" onChange={e => setSearchQuery(e.target.value)} />		
+						<Input backgroundColor="#040714" color='gray.300' variant="filled" placeholder="Search by title" width="500px" onChange={e => setSearchQuery(e.target.value)} />		
 				</InputGroup>
 				</form>	
 			</Flex>
 			<Box maxW={{ sm: "550px", md: "700px", lg: "1200px" }} mx="auto" mt={6}>
-				<Heading letterSpacing="3px" as="h1" size={{ sm: "xl", md: "2xl", lg: "2xl" }}>Explore</Heading>
+				<Heading letterSpacing="3px" color="#fff" as="h1" size={{ sm: "xl", md: "2xl", lg: "2xl" }}>Explore</Heading>
 				<Grid mt={5} templateColumns={{ sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(5, 1fr)" }} gap="3">
 					{isLoading && <MovieSkeleton cards={20} height="180px" />}
 					{searchLoad && <MovieSkeleton cards={20} height="180px" />}

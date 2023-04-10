@@ -2,11 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import MovieSkeleton from './movieSkeleton'
 
-const Viewers = ({isLoading}) => {
+const Viewers = ({ isLoading }) => {
 	return (
-	<>
-	<Container>
-		{isLoading && <MovieSkeleton cards={5} height="100px" />}
+			<Container>
+				
 		<Wrap>
 			  <img src='/images/viewers-disney.png' />
 			  <video autoPlay={true} loop={true} playsInline={true}>
@@ -38,7 +37,6 @@ const Viewers = ({isLoading}) => {
 			  </video>
 		</Wrap>
 			</Container>
-			</>
   )
 }
 

@@ -194,6 +194,7 @@ const DropDown = styled.div`
 	width: 98px;
 	top: 28px;
 	right: 0px;
+	color: #fff;
 	background: rgb(19, 19, 19);
 	border: 1px solid rgba(151,151,151,0.34);
 	border-radius: 4px;
