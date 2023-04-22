@@ -45,7 +45,7 @@ const Container = styled.div`
 
 const Content = styled.div`
 	max-width: 650px;
-	padding: 80px 60px;
+	padding-top: 80px;
 	width: 60%;
 	display: flex;
 	flex-direction: column;
@@ -78,6 +78,7 @@ const Description = styled.p`
 	font-size: 11px;
 	letter-spacing: 1.5px;
 	line-height: 1.5;
+	color: #ffffff;
 `
 
 const ContentLogoTwo = styled.img`
