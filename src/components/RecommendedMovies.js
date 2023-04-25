@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { selectTrending } from '../features/movieSlice';
 import { Link } from 'react-router-dom';
 import MovieSkeleton from './movieSkeleton';
-import { Skeleton } from '@chakra-ui/react';
 
 const RecommendedMovies = ({isLoading}) => {
 	const recommended = useSelector(selectTrending);
@@ -13,11 +12,11 @@ const RecommendedMovies = ({isLoading}) => {
 		<h4>Recommended for You</h4>
 		  <Content>
 			  {isLoading
-				  ? <MovieSkeleton cards={4} height="180px" />
-			  : recommended?.slice(4, 8).map(recommend => (		  
-					  <Wrap key={recommend.id}>
+				? <MovieSkeleton cards={4} height="180px" />
+			  	: recommended?.slice(4, 8).map(recommend => (		  
+					<Wrap key={recommend.id}>
 						  <Link to={`/detail/${recommend.id}`}>
-						<img src= {`https://image.tmdb.org/t/p/original${recommend.backdrop_path}`} />
+						<img alt={recommended.title} src= {`https://image.tmdb.org/t/p/original${recommend.backdrop_path}`} />
 						  </Link>
 					</Wrap>
 				  ))

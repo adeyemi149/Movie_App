@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Flex, Input, InputGroup, InputLeftElement, Heading, Box, Grid, Image, FormControl } from "@chakra-ui/react";
+import { Flex, Input, InputGroup, InputLeftElement, Heading, Box, Grid, Image } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons"
 import { Wrap } from './wrap';
 import axios from 'axios';

@@ -7,7 +7,7 @@ import RecommendedMovies from './RecommendedMovies'
 import Viewers from './Viewers'
 import Trending from "./Trending"
 import { trending, originals, recommendedForYou } from "../apiURL/apiURL"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import useHttp from '../utils/useHttp';
 import { setMovies } from '../features/movieSlice';
 import {Box} from "@chakra-ui/react"
@@ -26,7 +26,7 @@ const Home = () => {
 			recommendedForYou: recommended,
 		  })
 		)
-	}, [trendingMovies, originalMovies, recommended])
+	}, [trendingMovies, originalMovies, recommended, dispatch])
 	return (
 		<Container>
 			<ImageSlider isLoading={isLoadingTrending}/>

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components"
 import { useDispatch, useSelector } from 'react-redux';
 import {auth, provider} from "../firebase"
@@ -55,7 +55,7 @@ const Header = () => {
 		<Nav>
 		  	<Logo>
 			  <Link to="/home">	  
-				<img src="/images/logo.svg" />
+				<img alt="Logo" src="/images/logo.svg" />
 			  </Link>
 			</Logo>
 		   {
@@ -65,19 +65,19 @@ const Header = () => {
 			<NavMenu>
 			<Link to="/home">
 			<a>
-				<img src='/images/home-icon.svg' />
+				<img alt='Home' src='/images/home-icon.svg' />
 				<span>Home</span>
 			</a>
 			</Link>
 			<Link to="/search">			  
 			<a>
-				<img src='/images/search-icon.svg' />
+				<img alt="Search" src='/images/search-icon.svg' />
 				<span>Search</span>
 			</a>
 						  </Link>
 			<Link to="/watchList">			  
 			<a>
-				<img src='/images/watchlist-icon.svg' />
+				<img alt="watchList" src='/images/watchlist-icon.svg' />
 				<span>Watchlist</span>
 			</a>
 			</Link>
@@ -92,17 +92,17 @@ const Header = () => {
 		  {userName ? <BottomNav>
 			  <Link to="/home">
 			<a>
-				<img src='/images/home-icon.svg' />
+				<img alt="home" src='/images/home-icon.svg' />
 			</a>
 			</Link>
 			<Link to="/search">			  
 			<a>
-				<img src='/images/search-icon.svg' />
+				<img alt="search Icon" src='/images/search-icon.svg' />
 			</a>
 						  </Link>
 			<Link to="/watchList">			  
 			<a>
-				<img src='/images/watchlist-icon.svg' />
+				<img alt="watchList" src='/images/watchlist-icon.svg' />
 			</a>
 			  </Link>
 			  <Signout onClick={toggleSignout}>

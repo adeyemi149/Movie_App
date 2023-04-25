@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {useParams} from "react-router-dom"
 import axios from 'axios'
@@ -7,41 +7,41 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
 	ModalCloseButton,
-	Button,
 	Text,
-  Box
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { TrailerButton } from './button'
 import ReactPlayer from 'react-player'
 import { getAverage } from '../utils/average'
 import { useDispatch, useSelector } from "react-redux";
-import { addwatchList, setMovies } from "../features/movieSlice"
-import { SkeletonText, Skeleton } from "@chakra-ui/react"
-import { CheckIcon } from '@chakra-ui/icons'
-import { selectWatchList } from '../features/movieSlice';
+import { addToWatchList } from "../features/detailSlice"
+import { SkeletonText } from "@chakra-ui/react"
+import toast, {Toaster} from "react-hot-toast"
+import { selectDetails, selectLoading, selectTrailer, setDetails, setTrailer} from "../features/detailSlice"
 
 
 const Detail = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const { id } = useParams();
-	const [details, setDetails] = useState(null)
-	const [trailer, setTrailer] = useState(null)
-	const [isLoading, setIsLoading] = useState(true)
-	const [watchListItems, setWatchListItem] = useState({})
-	const [addedToWatchList, setAddedToWatchList] = useState(false);  
+	const [watchListItem, setWatchListItem] = useState({})
 	const dispatch = useDispatch();
+	const details = useSelector(selectDetails);
+	const isLoading = useSelector(selectLoading);
+	const trailer = useSelector(selectTrailer);
 
 	
 	const getDetails = async () => {
 		await axios
 			.get(`https://api.themoviedb.org/3/movie/${id}?api_key=19f84e11932abbc79e6d83f82d6d1045&language=en-US`)
 			.then(resp => {
-				setDetails(resp.data)
-				setIsLoading(false)
+				dispatch(
+					setDetails({
+						details: resp.data,
+						isLoading: false
+					})
+				)
 	})
 	}
 
@@ -52,29 +52,33 @@ const Detail = () => {
 				const results = resp.data.results;
 				const trailers = results
 					.filter(result => {
-						if (result.site == "YouTube" && result.type == "Trailer") {
+						if (result.site === "YouTube" && result.type === "Trailer") {
 							return true
 						} else {
 							return false
 						}
 					})
-				setTrailer(trailers);
+				dispatch(
+					setTrailer({
+						trailer: trailers
+					})
+				)
 			});
 	}
-
-	
-	const addToWatchList = () => {
+	const addToWatchListHandler = () => {
 		dispatch(
-			addwatchList({
-				watchList: watchListItems
-				})
+			addToWatchList({
+				watchListItems: watchListItem,
+				addedToWatchList: true
+			})
 		)
-		setAddedToWatchList(true);
+
+		toast.success('Movie added to watchlist');
 	}
 
 	useEffect(() => {
 		const updateWatchList = () => {
-			setWatchListItem({ id: details?.id, backdrop_path: details?.backdrop_path, title: details?.title });
+			setWatchListItem({ id: details?.id, backdrop_path: details?.backdrop_path, title: details?.title, addedToWatchList: true});
 		}
 		updateWatchList();
 		getDetails();
@@ -84,7 +88,7 @@ const Detail = () => {
   return (
 	<Container>
 		<Background>
-			<img src={`https://image.tmdb.org/t/p/original${details?.backdrop_path}`} />
+			<img alt={details?.title} src={`https://image.tmdb.org/t/p/original${details?.backdrop_path}`} />
 		</Background>
 		  <MovieTitle>
 			{details?.title || <SkeletonText mb={4} noOfLines={1} width="15%" />}
@@ -100,10 +104,10 @@ const Detail = () => {
 		  ))}
 		<Controls>
 			<PlayButton>
-				<img src='/images/play-icon-black.png' />
+				<img alt="play button" src='/images/play-icon-black.png' />
 				<span>PLAY</span>
 			</PlayButton>
-			  <TrailerButton onClick={onOpen}>
+			  <TrailerButton alt="Trailer Button" onClick={onOpen}>
 				  TRAILER
 			  </TrailerButton>
 		<Modal isOpen={isOpen} onClose={onClose} size="3xl" px="0">
@@ -120,14 +124,11 @@ const Detail = () => {
           </ModalBody>
         </ModalContent>
       	</Modal>
-			  <AddButton onClick={() => addToWatchList(details)}>
-				  {addedToWatchList
-					  ? (<CheckIcon color="green.500" />)
-					  : (<span>+</span>)
-				  }
+			  <AddButton onClick={() => addToWatchListHandler()}>
+					<span>+</span>
 			</AddButton>
 			<GroupWatchButton>
-				<img src='/images/group-icon.png' />
+				<img alt="group icon" src='/images/group-icon.png' />
 			</GroupWatchButton>
 		</Controls>
 		<Subtitle>
@@ -137,6 +138,11 @@ const Detail = () => {
 		  <Description>
 			  {details?.overview || <SkeletonText width="60%"/>}
 		  </Description>
+		  <Toaster
+			  position='top-right'
+			  icon="🎥"
+			  duration="3000"
+		  />
 	</Container>
   )
 }
@@ -148,6 +154,7 @@ const Container = styled.div`
 	padding: 0 calc(3.5vw + 5px);
 	position: relative;
 	color: #fff;
+	margin-bottom: 3em;
 `
 
 const Background = styled.div`
@@ -167,7 +174,6 @@ const Background = styled.div`
 `
 
 const MovieTitle = styled.div`
-	height: 30vh;
 	width: 100%;
 	min-height: 170px;
 	min-width: 200px;

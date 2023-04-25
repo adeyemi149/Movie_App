@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector } from "react-redux";
-import { selectOriginals, selectRecommended, selectTrending } from '../features/movieSlice';
+import { selectRecommended } from '../features/movieSlice';
 import { Link } from 'react-router-dom';
 import MovieSkeleton from './movieSkeleton';
 

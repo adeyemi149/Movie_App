@@ -3,9 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { selectRecommended } from '../features/movieSlice';
-import { useState } from 'react';
 import MovieSkeleton from './movieSkeleton';
-
 
 const NewDisney = ({isLoading}) => {
 	const disneyPlus = useSelector(selectRecommended);

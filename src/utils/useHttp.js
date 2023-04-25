@@ -16,7 +16,7 @@ const useHttp = (url) => {
 	}
 	useEffect(() => {
 		getMovies()
-	}, []);
+	}, [getMovies]);
 
 	return [ data, isLoading ];
 };
