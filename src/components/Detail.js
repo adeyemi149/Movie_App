@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useReducer } from 'react'
 import styled from 'styled-components'
 import {useParams} from "react-router-dom"
 import axios from 'axios'
@@ -32,7 +32,7 @@ const Detail = () => {
 	const [trailer, setTrailer] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 	const [watchListItems, setWatchListItem] = useState({})
-	const [addedToWatchList, setAddedToWatchList] = useState(false);
+	const [addedToWatchList, setAddedToWatchList] = useState(false);  
 	const dispatch = useDispatch();
 
 	
@@ -86,8 +86,9 @@ const Detail = () => {
 		<Background>
 			<img src={`https://image.tmdb.org/t/p/original${details?.backdrop_path}`} />
 		</Background>
-		<ImageTitle>
-		  </ImageTitle>
+		  <MovieTitle>
+			{details?.title || <SkeletonText mb={4} noOfLines={1} width="15%" />}
+		  </MovieTitle>
 		  <DateTitle>	  
 		  <MetaLanguage>{details?.original_language}</MetaLanguage>
 			  <span>{details?.release_date}</span>
@@ -165,20 +166,18 @@ const Background = styled.div`
 	}
 `
 
-const ImageTitle = styled.div`
+const MovieTitle = styled.div`
 	height: 30vh;
-	width: 35vw;
+	width: 100%;
 	min-height: 170px;
 	min-width: 200px;
 	opacity: 0.85;
 	margin-top: 50px;
-
-
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
-	}
+	display: flex;
+	align-items: flex-end;
+	font-size: 40px;
+	margin-bottom: 5px;
+	font-family: 'Rubik Wet Paint', cursive;
 `
 
 const Controls = styled.div`

@@ -6,11 +6,11 @@ import axios from 'axios';
 import { SEARCHAPI } from '../apiURL/apiURL';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectTrending } from '../features/movieSlice';
 import MovieSkeleton from './movieSkeleton';
 import useHttp from '../utils/useHttp';
 import { trending } from "../apiURL/apiURL"
 import { selectUserName } from '../features/userSlice';
+import {motion} from "framer-motion"
 
 const SearchMovies = () => {
 	const [searchQuery, setSearchQuery] = useState("");
@@ -45,9 +45,9 @@ const SearchMovies = () => {
 		addResults();
 	}, [trendingMovies])
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const handleInput = (e) => {
 		setResults([])
+		setSearchQuery(e.target.value)
 		if (searchQuery) {
 			getMovies(SEARCHAPI + searchQuery)
 		}
@@ -56,26 +56,36 @@ const SearchMovies = () => {
 		<>	
 			{!user && navigate("/")}
 			<Flex justifyContent="center" mt={3} mx="auto" width={{ sm: "300px", md: "400px", lg: "540px" }}>
-				<form onSubmit={handleSubmit}>
-				<InputGroup>	
+				<InputGroup w= {{base: "250px", lg: "450px"}} boxShadow="dark-lg">	
 						<InputLeftElement children={<SearchIcon color='gray.300'/>} />
-						<Input backgroundColor="#040714" color='gray.300' variant="filled" placeholder="Search by title" width="500px" onChange={e => setSearchQuery(e.target.value)} />		
+						<Input backgroundColor="#040714" color='gray.300' variant="filled" placeholder="Search by title" width="500px" onChange={handleInput} />		
 				</InputGroup>
-				</form>	
 			</Flex>
-			<Box maxW={{ sm: "550px", md: "700px", lg: "1200px" }} mx="auto" mt={6}>
+			<Box minW={{ sm: "550px", md: "700px", lg: "1200px" }} mx="auto" mt={6} mb={4}>
 				<Heading letterSpacing="3px" color="#fff" as="h1" size={{ sm: "xl", md: "2xl", lg: "2xl" }}>Explore</Heading>
-				<Grid mt={5} templateColumns={{ sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(5, 1fr)" }} gap="3">
+				<Grid mt={5} mb={{base: "20", lg: "10"}} templateColumns={{base: "repeat(2, 1fr)", sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)", lg: "repeat(5, 1fr)" }} columnGap="3" rowGap="3" mx="auto">
 					{isLoading && <MovieSkeleton cards={20} height="180px" />}
 					{searchLoad && <MovieSkeleton cards={20} height="180px" />}
 					{results?.map((result) => (
-								<Wrap key={result.id}>
+						<Wrap as={motion.Wrap}
+							key={result.id}
+							maxW={{ base: "150px", sm: "200px", md: "220px", lg: "250px" }}
+							maxH={{ base: "200px", sm: "250px", md: "270px", lg: "300px" }}
+							mx="auto"
+						variants={{
+							hidden: { opacity: 0 },
+							visible: { opacity: 1 }
+						}}
+						initial="hidden"
+						animate="visible"
+						transition={{ duration: 0.5 }}
+						>
 								<Link to={`/detail/` + result.id}>
 									<Image src={`https://image.tmdb.org/t/p/original${result.backdrop_path}`} width="100%" height="100%" objectFit="cover" loading="eager" placeholder="blur" />
 								</Link>
 							</Wrap>
-							))
-						}
+						))
+					}
 				</Grid>
 			</Box>
 		</>

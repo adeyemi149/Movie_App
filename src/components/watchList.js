@@ -15,7 +15,7 @@ const WatchList = () => {
 			  uniqueWatchList.length === 0
 				  ? <Heading color="#fff" w="500px">No Movies in WatchList Yet</Heading>
 				  : uniqueWatchList?.map((watch)=> (
-				<Wrap key={watch.id}>
+				<Wrap key={watch.id}  maxW={{base: "150px", sm: "200px", md: "220px", lg: "250px"}} maxH={{base: "200px", sm: "250px", md: "270px", lg: "300px"}} mx="auto">
 					<Link to={`/detail/`+ watch.id}>
 					<Image src={`https://image.tmdb.org/t/p/original${watch.backdrop_path}`} alt={watch.title} />
 					</Link>

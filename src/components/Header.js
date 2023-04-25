@@ -15,7 +15,6 @@ const Header = () => {
 	const toggleSignout = () => {
 		setShowSignout(!showSignout);
 	}
-	console.log(showSignout)
 	useEffect(() => {
 		auth.onAuthStateChanged(async (user) => {
 			if (!user) {
