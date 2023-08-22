@@ -55,7 +55,7 @@ const Header = () => {
 		<Nav>
 		  	<Logo>
 			  <Link to="/home">	  
-				<img alt="Logo" src="/images/logo.svg" />
+				<img alt="Logo" src="/images/Movie_icon.svg" />
 			  </Link>
 			</Logo>
 		   {
@@ -140,7 +140,7 @@ const Logo = styled.div`
 	@media (max-width: 450px) {
 		width: 100%;
 		display: flex;
-		justify-content: center;
+		justify-content: flex-start;
 	} 
 `
 
@@ -243,7 +243,7 @@ const Signout = styled.div`
 	position: relative;
 	height: 48px;
 	width: 48px;
-	margin-right: 10px;
+	margin-right: 36px;
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
@@ -253,6 +253,7 @@ const Signout = styled.div`
 		border-radius: 50%;
 		width: 100%;
 		height: 100%;
+		object-fit: cover;
 	}
 
 	&:hover {
@@ -262,9 +263,7 @@ const Signout = styled.div`
 		}
 	}
 
-	@media (max-width: 519px) {
-		display: none;
-	}
+	
 `
 
 const BottomNav = styled.div`
