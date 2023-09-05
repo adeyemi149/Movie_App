@@ -103,12 +103,8 @@ const Detail = () => {
 			  <Text key={genre.id} mb={3} display="inline-block" fontSize="15px">{genre.name},&nbsp;</Text>
 		  ))}
 		<Controls>
-			<PlayButton>
-				<img alt="play button" src='/images/play-icon-black.png' />
-				<span>PLAY</span>
-			</PlayButton>
 			  <TrailerButton alt="Trailer Button" onClick={onOpen}>
-				  TRAILER
+				  WATCH TRAILER NOW
 			  </TrailerButton>
 		<Modal isOpen={isOpen} onClose={onClose} size="3xl" px="0">
         <ModalOverlay />
